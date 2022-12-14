@@ -21,7 +21,13 @@ function OCR
     textArea.Layout.Row = 1;
     textArea.Layout.Column = 3;
 
-    selectButton = uibutton(gridLayout, "Text", "Wybierz zdjęcie");
+    selectButton = uibutton(gridLayout, "Text", "Wybierz zdjęcie", "ButtonPushedFcn", @loadImage);
     selectButton.Layout.Row = 2;
     selectButton.Layout.Column = 1;
+
+    function loadImage(src,event)
+    [file, path] = uigetfile({'*.png;*.jpg'});
+    filePath = append(path, file);
+    originalImage.ImageSource = filePath;
+    end
 end
