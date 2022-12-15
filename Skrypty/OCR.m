@@ -38,8 +38,6 @@ function OCR
     function loadPreparedImage(src, event)
         image = imread(originalImage.ImageSource);
         binaryImage = prepareImage(image, true, 0.2);
-        [x, y] = size(binaryImage);
-        disp([x, y]);
         preparedImage.ImageSource = repmat(double(binaryImage), 1, 1, 3);
     end
 end
