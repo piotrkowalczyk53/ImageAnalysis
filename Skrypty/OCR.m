@@ -25,9 +25,21 @@ function OCR
     selectButton.Layout.Row = 2;
     selectButton.Layout.Column = 1;
 
-    function loadImage(src,event)
-    [file, path] = uigetfile({'*.png;*.jpg'});
-    filePath = append(path, file);
-    originalImage.ImageSource = filePath;
+    prepareButton = uibutton(gridLayout, "Text", "Przygotuj zdjęcie", "ButtonPushedFcn", @loadPreparedImage);
+    prepareButton.Layout.Row = 2;
+    prepareButton.Layout.Column = 2;
+
+    function loadImage(src, event)
+        [file, path] = uigetfile({'*.png;*.jpg'});
+        filePath = append(path, file);
+        originalImage.ImageSource = filePath;
+    end
+
+    function loadPreparedImage(src, event)
+        image = imread(originalImage.ImageSource);
+        binaryImage = prepareImage(image, true, 0.2);
+        [x, y] = size(binaryImage);
+        disp([x, y]);
+        preparedImage.ImageSource = repmat(double(binaryImage), 1, 1, 3);
     end
 end
