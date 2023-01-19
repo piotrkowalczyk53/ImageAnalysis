@@ -42,9 +42,8 @@ function finalText = tr(binaryImage)
         lineCharsImg = regionprops(lineChars, "Image");
         
         for im = 1:max(lineChars, [], 'all')
-            lineCharsImg(im).Image = to128Image(lineCharsImg(im).Image);
-            imshow(lineCharsImg(im).Image);
-            finalText = finalText + string(classify(net, lineCharsImg(im).Image));
+            imgToCheck = 255 * to128Image(lineCharsImg(im).Image);
+            finalText = finalText + string(classify(net, imgToCheck));
         end
     end
     
