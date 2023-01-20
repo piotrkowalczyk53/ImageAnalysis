@@ -110,7 +110,7 @@ function OCR
     function loadPreparedImage(src, event)
         h = waitbar(0, 'Please wait...');
         image = imread(originalImage.ImageSource);
-        binaryImage = prepareImage(image, false, sensitivity, openSize);
+        binaryImage = prepareImage(image, badLighting, sensitivity, openSize);
         preparedImage.ImageSource = repmat(double(binaryImage), 1, 1, 3);
         close(h)
     end
