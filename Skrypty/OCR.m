@@ -15,7 +15,7 @@ function OCR
     % Parametry siatki
     gridLayout = uigridlayout(mainWindow, [3, 5]);
     gridLayout.ColumnWidth = {'1x', '1x', '1x'};
-    gridLayout.RowHeight = {'1x', 30, 30, 30, 30};
+    gridLayout.RowHeight = {'1x', 30, 30, 50, 15};
 
     % Obiekty programu
     originalImage = uiimage(gridLayout, "ImageSource", "../Obrazy/OCR_1.png");
@@ -110,8 +110,10 @@ function OCR
     function loadPreparedImage(src, event)
         h = waitbar(0, 'Please wait...');
         image = imread(originalImage.ImageSource);
-        binaryImage = prepareImage(image, badLighting, sensitivity, openSize);
-        preparedImage.ImageSource = repmat(double(binaryImage), 1, 1, 3);
+        [binaryImage, sliderRotation.Value] = prepareImage(image, badLighting, sensitivity, openSize);
+        binaryCopy = binaryImage;
+        binaryCopy = imrotate(binaryCopy, sliderRotation.Value, 'nearest', 'loose');
+        preparedImage.ImageSource = repmat(double(binaryCopy), 1, 1, 3);
         close(h)
     end
 

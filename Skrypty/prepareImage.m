@@ -122,5 +122,6 @@ function [binaryImage, rotation] = prepareImage(image, badLightning, sensitivity
     if openSize > 0
         image = bwareaopen(image, openSize);
     end
+    rotation = -rotation;
     binaryImage = image;
 end
