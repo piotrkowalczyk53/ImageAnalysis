@@ -5,7 +5,6 @@ function finalText = translate(binaryImage)
     binaryImage = imrotate(binaryImage, angle);
     binaryImage = imclearborder(~binaryImage);
     binaryImage = imopen(binaryImage, ones(3));
-    imshow(binaryImage);
 
     rows = [0, 0];
 
