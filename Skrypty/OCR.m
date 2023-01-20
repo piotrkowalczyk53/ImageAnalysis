@@ -9,7 +9,7 @@ function OCR
     gridLayout.ColumnWidth = {'1x', '1x', '1x'};
 
     % Obiekty programu
-    originalImage = uiimage(gridLayout, "ImageSource", "kiepskie_zdjecie.jpg");
+    originalImage = uiimage(gridLayout, "ImageSource", "lepsze_zdjecie.jpg");
     originalImage.Layout.Row = 1;
     originalImage.Layout.Column = 1;
 
@@ -43,7 +43,8 @@ function OCR
 
     function loadPreparedImage(src, event)
         image = imread(originalImage.ImageSource);
-        binaryImage = prepareImage(image, true, 0.2);
+        treshhold = graythresh(image);
+        binaryImage = prepareImage(image, true, treshhold);
         preparedImage.ImageSource = repmat(double(binaryImage), 1, 1, 3);
     end
 
