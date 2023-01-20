@@ -1,7 +1,4 @@
-load bim.mat;
-tr(binaryImage)
-
-function finalText = tr(binaryImage)
+function finalText = translate(binaryImage)
     load net.mat net;
 
     angle = -6;
@@ -70,5 +67,4 @@ function finalText = tr(binaryImage)
         end
         finalText = finalText + newline;
     end
-    
 end

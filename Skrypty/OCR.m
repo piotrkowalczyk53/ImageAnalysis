@@ -38,6 +38,8 @@ function OCR
         filePath = append(path, file);
         originalImage.ImageSource = filePath;
     end
+    
+    global binaryImage;
 
     function loadPreparedImage(src, event)
         image = imread(originalImage.ImageSource);
@@ -46,6 +48,6 @@ function OCR
     end
 
     function translateImage(src, event)
-        textArea.Value = "bruh";
+        textArea.Value = translate(binaryImage);
     end
 end
