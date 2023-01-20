@@ -55,7 +55,7 @@ function OCR
         h = waitbar(0, 'Please wait...');
         image = imread(originalImage.ImageSource);
         treshhold = graythresh(image);
-        binaryImage = prepareImage(image, true, treshhold);
+        binaryImage = prepareImage(image, false, 0, 0);
         preparedImage.ImageSource = repmat(double(binaryImage), 1, 1, 3);
         close(h)
     end
