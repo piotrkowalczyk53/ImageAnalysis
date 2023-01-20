@@ -34,7 +34,7 @@ function OCR
     prepareButton.Layout.Column = 3;
 
     function loadImage(src, event)
-        [file, path] = uigetfile({'*.png;*.jpg'});
+        [file, path] = uigetfile({'*.png;*.jpg'}, "Wybierz zdjęcie", "../Obrazy");
         filePath = append(path, file);
         originalImage.ImageSource = filePath;
     end
