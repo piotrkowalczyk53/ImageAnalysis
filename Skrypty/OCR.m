@@ -7,8 +7,7 @@ function OCR
     mainWindow.Name = "OCR";
     
     % Parametry siatki
-    gridLayout = uigridlayout(mainWindow, [3, 3]);
-    gridLayout.RowHeight = {'1x', 30};
+    gridLayout = uigridlayout(mainWindow, [4, 3]);
     gridLayout.ColumnWidth = {'1x', '1x', '1x'};
     gridLayout.RowHeight = {'1x', 30, 30};
 
@@ -69,7 +68,7 @@ function OCR
 
     function rotateImage(src, event)
         binaryCopy = binaryImage;
-        binaryCopy = imrotate(binaryCopy, slider.Value, 'nearest', 'crop');
+        binaryCopy = imrotate(binaryCopy, slider.Value, 'nearest', 'loose');
         preparedImage.ImageSource = repmat(double(binaryCopy), 1, 1, 3);
     end
 end

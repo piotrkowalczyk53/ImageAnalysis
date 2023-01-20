@@ -40,11 +40,10 @@ for i = 1:leng
             font = fontsList(j);
             for iter = 1:100
                 image = randImage(char, font);
-                imageLabel = bwlabel(~imbinarize(rgb2gray(image)));
+                imageLabel = bwlabel(imbinarize(rgb2gray(image)));
                 imageLabel(imageLabel > 0) = 1;
                 imageImage = regionprops(imageLabel, "Image");
-                image = imageImage(1).Image;
-                image = to128Image(image);
+                image = to128Image(imageImage(1).Image);
                 imwrite(image, strcat(database_folder,folder_name, int2str(imageIterator), '.png'));
                 imageIterator = imageIterator + 1;
             end
@@ -56,14 +55,11 @@ close(h)
 
 %Funkcja tworząca obrazy ze zniekształconymi znakami
 function image = randImage(char, font)
-    im1 = insertText(255*ones(500,500),[0 0],char,'Font',font,'FontSize',200);
-    im2 = imcomplement(im1);
-    im3 = imrotate(im2, randi([-15, 15]), "nearest", "crop");
+    im1 = insertText(zeros(300,300),[0 0],char,'Font',font,'FontSize',200, 'TextColor','white', 'BoxColor','black');
+    im2 = imrotate(im1, randi([-15, 15]), "nearest", "crop");
     r = -pi/18 + (pi/9)*rand(1);
     tform = affine2d([1, tan(r), 0; 0, 1, 0; 0, 0, 1]);
-    im4 = imwarp(im3,tform);
-    im6 = imcomplement(im4);
-    image = im6;
+    image = imwarp(im2,tform);
 end
 
 %Funckja tworząca odpowiednie nazwy folderów dla każdego znaku
@@ -93,28 +89,4 @@ function folder_name = createName(char)
         folder_name = char;
         folder_name = strcat(folder_name, '_lower/');
     end
-end
-
-function img128 = to128Image(image)
-    [y, x] = size(image);
-    if x > y
-        image = imresize(image, 128 / x);
-        [y, ~] = size(image);
-        toAdd = 128 - y;
-        if mod(toAdd, 2) == 0
-            image = [zeros(toAdd / 2, 128); image; zeros(toAdd / 2, 128)];
-        else
-            image = [zeros(fix(toAdd / 2), 128); image; zeros(fix(toAdd / 2) + 1, 128)];
-        end
-    else
-        image = imresize(image, 128 / y);
-        [~, x] = size(image);
-        toAdd = 128 - x;
-        if mod(toAdd, 2) == 0
-            image = [zeros(128, toAdd / 2), image, zeros(128, toAdd / 2)];
-        else
-            image = [zeros(128, fix(toAdd / 2)), image, zeros(128, fix(toAdd / 2) + 1)];
-        end
-    end
-    img128 = image;
 end

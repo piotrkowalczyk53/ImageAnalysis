@@ -19,7 +19,7 @@ imds.Labels = cellfun(@(x) x(1),imds.Labels,'un',0);
 imds.Labels = categorical(imds.Labels);
 
 %Podział danych na treningowe i walidacji
-numTrainFiles = 700;
+numTrainFiles = 1150;
 [imdsTrain,imdsValidation] = splitEachLabel(imds,numTrainFiles,'randomize');
 
 %Definiowanie architektury sieci
