@@ -4,7 +4,7 @@ function finalText = translate(binaryImage)
     angle = 0;
     binaryImage = imrotate(binaryImage, angle);
     binaryImage = imclearborder(~binaryImage);
-    binaryImage = imopen(binaryImage, ones(3));
+    binaryImage = bwareaopen(binaryImage, 10);
     imshow(binaryImage);
 
     rows = [0, 0];
@@ -60,7 +60,7 @@ function finalText = translate(binaryImage)
             imgToCheck = 255 * to128Image(lineCharsImg(im).Image);
             finalText = finalText + string(classify(net, imgToCheck));
             if im ~= max(lineChars, [], 'all')
-                if spaceVector(im) > avgSpace
+                if spaceVector(im) > 1.3*avgSpace
                     finalText = finalText + " ";
                 end
             end
