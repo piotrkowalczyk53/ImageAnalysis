@@ -33,20 +33,9 @@ function finalText = translate(binaryImage)
         lineCharsImg = regionprops(lineChars, "Image");
 
         spaceVector = [];
-        begin = 0;
-        startCounting = false;
-        set = false;
-        for x = 1:size(line, 2)
-            if sum(line(:, x)) > 0 && ~startCounting
-                startCounting = true;
-            elseif sum(line(:, x)) > 0 && startCounting && set
-                spaceVector(length(spaceVector) + 1) = x - begin;
-                set = false;
-            elseif sum(line(:, x)) == 0 && startCounting && ~set
-                begin = x;
-                set = true;
-            end
-
+        boxes = regionprops(lineChars, "BoundingBox");
+        for obj = 1:(length(boxes) - 1)
+            spaceVector(obj) = boxes(obj + 1).BoundingBox(1) - (boxes(obj).BoundingBox(1) + boxes(obj).BoundingBox(3));
         end
         avgSpace = sum(spaceVector, "all") / length(spaceVector);
 
