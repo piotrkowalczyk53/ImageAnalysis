@@ -1,12 +1,6 @@
 function finalText = translate(binaryImage)
     load net.mat net;
 
-    angle = 0;
-    binaryImage = imrotate(binaryImage, angle);
-    binaryImage = imclearborder(~binaryImage);
-    binaryImage = bwareaopen(binaryImage, 3);
-    imshow(binaryImage);
-
     rows = [0, 0];
 
     rowStart = 0;
