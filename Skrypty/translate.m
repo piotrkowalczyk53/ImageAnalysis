@@ -55,7 +55,7 @@ function finalText = translate(binaryImage)
 
         end
         avgSpace = sum(spaceVector, "all") / length(spaceVector);
-        
+
         for im = 1:max(lineChars, [], 'all')
             imgToCheck = 255 * to128Image(lineCharsImg(im).Image);
             finalText = finalText + string(classify(net, imgToCheck));

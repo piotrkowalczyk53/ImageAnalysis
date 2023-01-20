@@ -9,7 +9,7 @@ function OCR
     gridLayout.ColumnWidth = {'1x', '1x', '1x'};
 
     % Obiekty programu
-    originalImage = uiimage(gridLayout, "ImageSource", "lepsze_zdjecie.jpg");
+    originalImage = uiimage(gridLayout, "ImageSource", "../Obrazy/OCR_1.jpg");
     originalImage.Layout.Row = 1;
     originalImage.Layout.Column = 1;
 
