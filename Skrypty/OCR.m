@@ -3,17 +3,19 @@ function OCR
     global binaryImage;
     global sensitivity;
     global openSize;
+    global badLighting;
     openSize = 0;
     sensitivity = 0;
+    badLighting = false;
 
     % Utworzenie okna programu
     mainWindow = uifigure;
     mainWindow.Name = "OCR";
     
     % Parametry siatki
-    gridLayout = uigridlayout(mainWindow, [3, 4]);
+    gridLayout = uigridlayout(mainWindow, [3, 5]);
     gridLayout.ColumnWidth = {'1x', '1x', '1x'};
-    gridLayout.RowHeight = {'1x', 30, 30, 30};
+    gridLayout.RowHeight = {'1x', 30, 30, 30, 30};
 
     % Obiekty programu
     originalImage = uiimage(gridLayout, "ImageSource", "../Obrazy/OCR_1.png");
@@ -86,7 +88,19 @@ function OCR
     sliderOpen.ValueChangedFcn = @setOpenSize;
 
 
+    checkboxBadLighting = uicheckbox(gridLayout);
+    checkboxBadLighting.Layout.Row = 5;
+    checkboxBadLighting.Layout.Column = 1;
+    checkboxBadLighting.Text = 'Złe oświetlenie';
+    checkboxBadLighting.ValueChangedFcn = @setBadLighting;
+
+
     function loadImage(src, event)
+        sliderRotation.Value = 0;
+        sliderOpen.Value = 0;
+        sliderSensitivity.Value = 0;
+        checkboxBadLighting.Value = 0;
+        badLighting = false;
         [file, path] = uigetfile({'*.png;*.jpg'}, "Wybierz zdjęcie", "../Obrazy");
         filePath = append(path, file);
         originalImage.ImageSource = filePath;
@@ -94,9 +108,6 @@ function OCR
     
 
     function loadPreparedImage(src, event)
-        sliderRotation.Value = 0;
-        sliderOpen.Value = 0;
-        sliderSensitivity.Value = 0;
         h = waitbar(0, 'Please wait...');
         image = imread(originalImage.ImageSource);
         binaryImage = prepareImage(image, false, sensitivity, openSize);
@@ -122,5 +133,13 @@ function OCR
 
     function setOpenSize(src, event)
         openSize = round(sliderOpen.Value);
+    end
+
+    function setBadLighting(src, event)
+        if src.Value == 1
+            badLighting = true;
+        else
+            badLighting = false;
+        end
     end
 end
