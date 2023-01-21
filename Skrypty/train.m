@@ -68,6 +68,4 @@ YValidation = imdsValidation.Labels;
 
 save net.mat net;
 
-accuracy = sum(YPred == YValidation)/numel(YValidation)
-
-save net;
+accuracy = sum(YPred == YValidation)/numel(YValidation);

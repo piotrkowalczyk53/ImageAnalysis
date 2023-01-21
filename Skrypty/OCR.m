@@ -119,13 +119,13 @@ function OCR
 
     function translateImage(src, event)
         h = waitbar(0, 'Please wait...');
-        textArea.Value = translate(binaryImage);
+        textArea.Value = translate(imrotate(binaryImage, sliderRotation.Value, 'bilinear', 'loose'));
         close(h)
     end
 
     function rotateImage(src, event)
         binaryCopy = binaryImage;
-        binaryCopy = imrotate(binaryCopy, sliderRotation.Value, 'nearest', 'loose');
+        binaryCopy = imrotate(binaryCopy, sliderRotation.Value, 'bilinear', 'loose');
         preparedImage.ImageSource = repmat(double(binaryCopy), 1, 1, 3);
     end
 

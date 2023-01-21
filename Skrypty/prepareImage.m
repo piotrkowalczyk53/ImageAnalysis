@@ -2,7 +2,7 @@ function [binaryImage, rotation] = prepareImage(image, badLightning, sensitivity
     % Funkcja zwraca obraz z białym tekstem na czarnym tle
 
     % Konwersja do odcieni szarości
-    image = rgb2gray(image);
+    image = im2gray(image);
 
     % Sprawdzenie czy na ramach obrazu jest on biały, jeśli tak jest
     % traktowany jak wygenerowany cyfrowo

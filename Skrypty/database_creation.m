@@ -55,11 +55,11 @@ close(h)
 
 %Funkcja tworząca obrazy ze zniekształconymi znakami
 function image = randImage(char, font)
-    im1 = insertText(zeros(300,300),[0 0],char,'Font',font,'FontSize',200, 'TextColor','white', 'BoxColor','black');
-    im2 = imrotate(im1, randi([-15, 15]), "nearest", "crop");
-    r = -pi/18 + (pi/9)*rand(1);
-    tform = affine2d([1, tan(r), 0; 0, 1, 0; 0, 0, 1]);
-    image = imwarp(im2,tform);
+    image = insertText(zeros(300,300),[0 0],char,'Font',font,'FontSize',200, 'TextColor','white', 'BoxColor','black');
+    %image = imrotate(im1, randi([-5, 5]), "nearest", "crop");
+    %r = -pi/18 + (pi/9)*rand(1);
+    %tform = affine2d([1, tan(r), 0; 0, 1, 0; 0, 0, 1]);
+    %image = imwarp(im2,tform);
 end
 
 %Funckja tworząca odpowiednie nazwy folderów dla każdego znaku
