@@ -60,6 +60,7 @@ function OCR
     sliderSensitivity.Limits = [0 1]; % ustawiamy zakres wartości
     sliderSensitivity.Value = 0; % ustawiamy wartość początkową
     sliderSensitivity.ValueChangedFcn = @setSensitivity;
+    sliderSensitivity.MajorTicks = 0:0.1:1;
 
 
     sliderRotationLabel = uilabel(gridLayout, "Text", "Rotacja");
@@ -73,6 +74,7 @@ function OCR
     sliderRotation.Limits = [-90 90]; % ustawiamy zakres wartości
     sliderRotation.Value = 0; % ustawiamy wartość początkową
     sliderRotation.ValueChangedFcn = @rotateImage;
+    sliderRotation.MajorTicks = -90:10:90;
  
 
     sliderOpenLabel = uilabel(gridLayout, "Text", "Otwarcie");
@@ -83,9 +85,10 @@ function OCR
     sliderOpen = uislider(gridLayout); % tworzymy slider
     sliderOpen.Layout.Row = 4;
     sliderOpen.Layout.Column = 3;
-    sliderOpen.Limits = [0 10]; % ustawiamy zakres wartości
+    sliderOpen.Limits = [0 25]; % ustawiamy zakres wartości
     sliderOpen.Value = 0; % ustawiamy wartość początkową
     sliderOpen.ValueChangedFcn = @setOpenSize;
+    sliderOpen.MajorTicks = 0:25;
 
 
     checkboxBadLighting = uicheckbox(gridLayout);
